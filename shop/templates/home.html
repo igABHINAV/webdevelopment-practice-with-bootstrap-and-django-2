@@ -69,7 +69,7 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
+<!-- 
 <div class="container " style="margin-top: 85px;">
   <h3>shop</h3>
   <div id="firstcarousel" class="carousel slide" data-bs-ride="carousel">
@@ -229,11 +229,11 @@
     </button>
   </div>
 
-</div>
+</div> -->
 
 <!-- 
   ------------------------------------------------------------- -->
-<div class="container " style="margin-top: 85px;">
+<!-- <div class="container " style="margin-top: 85px;">
   <h3>shop</h3>
   <div id="second" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -391,11 +391,13 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-</div>
+</div> -->
 
 <div class="container " style="margin-top: 85px;">
-  <h3>shop</h3>
   {%for p,range,slides in ap%}
+  <br><br><br>
+  <h3>{{p.0.product_category}}</h3>
+  
   <div id="carouselofitems{{forloop.counter}}" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -414,6 +416,7 @@
           {%if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last%}
         </ul>
       </div>
+      
       <div class="carousel-item">
         <ul style="display:flex;">
 
