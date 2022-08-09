@@ -9,8 +9,9 @@ def index(req):
     slides=n//4+math.ceil((n/4)-(n//4))
     c=Product.objects.values('product_category')
     print(c)
-    params={'p':p,'range':range(n),'slides':slides}
-    return render(req,'home.html',params)
+    params=[[p,range(n),slides],[p,range(n),slides]]
+    ap={'ap':params}
+    return render(req,'home.html',ap)
 def AddtoList(req):
     
     return render(req,'insert.html')    
