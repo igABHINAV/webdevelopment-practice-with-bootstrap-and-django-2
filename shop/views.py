@@ -11,7 +11,7 @@ def index(req):
     allprods=[]
     c=Product.objects.values('product_category')
     cat={item['product_category'] for item in c}
-    print(c)
+
     for i in cat :
         prod=Product.objects.filter(product_category=i)
         n=len(prod)
