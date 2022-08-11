@@ -30,7 +30,13 @@
           <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
           <li><a href="/addtolist" class="nav-link px-2 text-white">Add an item</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+
+          {% if request.user.is_authenticated %}
+          <li class="nav-link px-2 text-white">logged in as : {{name}}</li>
+          {% comment %} {% else %}
+          <li class="nav-link px-2 text-white">login for more features</li> {% endcomment %}
+          {%endif%}
+
         </ul>
 
 
@@ -74,7 +80,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Log In</button>
           </div>
         </form>
       </div>
@@ -88,16 +94,54 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="signupmodal">Modal title</h5>
+          <h5 class="modal-title" id="signupmodal">Sign Up</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <form method="post" action="/">
+            {%csrf_token%}
+            <div class="mb-3">
+              <label for="formGroupExampleInput" class="form-label">Username</label>
+              <input type="text" name='iName' class="form-control" id="formGroupExampleInput2"
+                placeholder="choose a username">
+            </div>
+            <div class="mb-3">
+              <label for="formGroupExampleInput2" class="form-label">Password</label>
+              <input type="text" class="form-control" name="iPass" id="formGroupExampleInput2"
+                placeholder="enter a password">
+            </div>
+            <div class="mb-3">
+              <label for="formGroupExampleInput2" class="form-label">confirm Password</label>
+              <input type="text" class="form-control" name="iPass2" id="formGroupExampleInput2"
+                placeholder="re-enter your password">
+            </div>
+            <fieldset class="row mb-3 my-3">
+              <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="iGen" id="gridRadios1" value="option1"
+                    checked>
+                  <label class="form-check-label" for="gridRadios1">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="iGen" id="gridRadios2" value="option2">
+                  <label class="form-check-label" for="gridRadios2">
+                    Female
+                  </label>
+                </div>
+
+              </div>
+            </fieldset>
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+        </form>
       </div>
     </div>
   </div>

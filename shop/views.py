@@ -13,14 +13,28 @@ def index(req):
     # if req.user.is_anonymous :
     #     return redirect(req,'insert.html')
     if req.method=="POST":
+        if req.POST.get('emaill'):
+            Username=req.POST.get('emaill')
+            password=req.POST.get('passwordy')
+            useri=authenticate(req,username=Username,password=password)
+            if useri is not None:
+                login(req ,useri)
+                params={'name':Username}
+                return render(req,'home.html',params) 
+        else :
+            username=req.POST.get('iName')
+            password=req.POST.get('iPass')
+            checkpass=req.POST.get('iPass2')
+            gender=req.POST.get('iGen')
+            if(password!=checkpass):
+                return HttpResponse("YOUR PASSWORDS DON'T MATCH ")
+            else :
+                user = User.objects.create_user(username, gender,password)
+                
+                user.save()
+                return render(req,'home.html')
+    
 
-        Username=req.POST.get('emaill')
-        password=req.POST.get('passwordy')
-        useri=authenticate(req,username=Username,password=password)
-        if useri is not None:
-            login(req ,useri)
-            params={'name':Username}
-            return render(req,'insert.html',params) 
 
         
     else :
@@ -46,3 +60,5 @@ def index(req):
 def AddtoList(req):
     
     return render(req,'insert.html')    
+
+    
