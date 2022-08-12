@@ -1,12 +1,17 @@
+from http.client import HTTPResponse
 import imp
 from itertools import product
-from django.shortcuts import render
+from django.shortcuts import render,redirect,HttpResponse
 from .models import Product
+from django.contrib.auth.models import User
+from django.contrib.auth import logout , login , authenticate
 import math
-# Create your views here.
+# Create your views here.   1234!@#$qwer
 def index(req):
     # p=Product.objects.all()
     # n=len(p)
+    # if req.user.is_anonymous :
+    #     return redirect(req,'insert.html')
     
     allprods=[]
     c=Product.objects.values('product_category')
@@ -18,10 +23,41 @@ def index(req):
         slides=n//4+math.ceil((n/4)-(n//4))
         allprods.append([prod,range(1,slides),slides])
 
-
     # params=[[p,range(n),slides],[p,range(n),slides]]
-    ap={'ap':allprods}
+    # 
+    if req.method=="POST":
+        if req.POST.get('emaill'):
+            Username=req.POST.get('emaill')
+            password=req.POST.get('passwordy')
+            useri=authenticate(req,username=Username,password=password)
+            if useri is not None:
+                login(req ,useri)
+                params={'name':Username , 'ap':allprods}
+                return render(req,'home.html',params) 
+        else :
+            username=req.POST.get('iName')
+            password=req.POST.get('iPass')
+            checkpass=req.POST.get('iPass2')
+            gender=req.POST.get('iGen')
+            if(password!=checkpass):
+                return HttpResponse("YOUR PASSWORDS DON'T MATCH ")
+            else :
+                user = User.objects.create_user(username, gender,password)
+                ap={'ap':allprods}
+                user.save()
+                return render(req,'home.html',ap)
+    
+
+
+        
+            
+    
+    ap={'ap':allprods}    
     return render(req,'home.html',ap)
 def AddtoList(req):
     
     return render(req,'insert.html')    
+
+def Lnout(req):
+    logout(req)
+    return redirect('home')
