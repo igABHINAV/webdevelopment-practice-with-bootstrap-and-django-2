@@ -35,18 +35,21 @@
           <li class="nav-link px-2 text-white">logged in as : {{name}}</li>
           {% comment %} {% else %}
           <li class="nav-link px-2 text-white">login for more features</li> {% endcomment %}
+          <li><a href="logout/" class="nav-link px-2 text-white" style="border: 2px solid rgb(188, 79, 79); color: aqua;">Log Out</a></li>
+
           {%endif%}
 
         </ul>
 
 
-
+        {% if not request.user.is_authenticated %}
         <div class="text-end">
           <button type="button" class="btn btn-outline-light me-2" data-bs-toggle="modal"
             data-bs-target="#loginmodal">Log In</button>
           <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#signupmodal">Sign
             Up</button>
         </div>
+        {%endif%}
       </div>
     </div>
   </header>
@@ -68,12 +71,12 @@
           <div class="modal-body">
 
             <div class="mb-3">
-              <label for="formGroupExampleInput" class="form-label">username</label>
+              <label for="formGroupExampleInput" class="form-label">Username</label>
               <input type="text" name='emaill' class="form-control" id="formGroupExampleInput"
                 placeholder="Example input placeholder">
             </div>
             <div class="mb-3">
-              <label for="formGroupExampleInput2" class="form-label">Another label</label>
+              <label for="formGroupExampleInput2" class="form-label">Password</label>
               <input type="text" class="form-control" name="passwordy" id="formGroupExampleInput2"
                 placeholder="Another input placeholder">
             </div>
