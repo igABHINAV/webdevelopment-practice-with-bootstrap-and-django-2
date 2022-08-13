@@ -54,10 +54,27 @@ def index(req):
     
     ap={'ap':allprods}    
     return render(req,'home.html',ap)
+
+
 def AddtoList(req):
+    if req.method=='POST':
+        p=Product()
+        p.product_name=req.POST.get('pname')
+        p.product_category=req.POST.get('pcate')
+        p.product_price=req.POST.get('ppric')
+        p.product_desc=req.POST.get('pdesc')    
+        if len(req.FILES)!=0:
+            p.product_image=req.FILES['imagica']
+        p.save()
+        return render(req,'insert.html')
     
     return render(req,'insert.html')    
+
+
 
 def Lnout(req):
     logout(req)
     return redirect('home')
+
+def F(req):
+    return render(req,'about.html')    
