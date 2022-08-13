@@ -6,4 +6,5 @@ urlpatterns = [
     path('',views.index,name='home' ),
     path('addtolist/',views.AddtoList,name='AddtoList'),
     path('logout/',views.Lnout,name='log_out'),
+    path('features/',views.F,name='F')
 ]

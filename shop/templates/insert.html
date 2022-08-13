@@ -2,7 +2,7 @@
 {%block title%}Add an Item{%endblock title%}
 {%block style%}
 <style>
-  
+
 </style>
 {%endblock style%}
 {%block body%}
@@ -11,45 +11,73 @@
 
 
 {% comment %} ---------------------------------------------------------------------- {% endcomment %}
-<!-- <div class="container my-5">
-  <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <ul style="display:flex;">
-          {%for i in p%}
-          <li>
-            <div class="card" style="width: 18rem; height: 20rem;">
-              <img src='/media/{{i.product_image}}' class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{i.product_name}}</h5>
-                <p class="card-text">{{i.product_desc}}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
+{% if not request.user.is_authenticated %}
+<h2>Please Log in First</h2>
+{%else%}
+<div class="container">
+
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3 my-5">Add your Product</h4>
+        <form class="needs-validation" novalidate="" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">Product Name</label>
+                    <input type="text" name="pname" class="form-control" id="firstName" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Product name is required.
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control" name="pcate" id="category" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid Category is required.
+                    </div>
+                </div>
+
+
+
+
+
+                
+
+                <div class="col-12">
+                    <label for="address" class="form-label">Description about product</label>
+                    <input type="text" class="form-control" name="pdesc" id="" placeholder="description" required="">
+                    <div class="invalid-feedback">
+                        Please enter your description.
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="col-md-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" name="ppric" id="price" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Price required.
+                    </div>
+                </div>
             </div>
-          </li>
-          {%if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last%}
-        </ul>
-      </div>
-      <div class="carousel-item">
-        <ul style="display:flex;">
+
+            <div class="mb-3 my-4">
+                <label for="formFileSm" class="form-label">Image</label>
+                <input class="form-control form-control-sm" id="formFileSm" name="imagica" type="file">
+            </div>
 
 
-          {%endif%}
-          {%endfor%}
-      </div>
+
+            <hr class="my-4">
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue </button>
+        </form>
     </div>
+</div>
 
-  </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching"
-    data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching"
-    data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div> -->
-<h1>WELCOME {{name}} sir</h1>
+{%endif%}
 {%endblock body%}
